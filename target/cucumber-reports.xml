@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Cucumber" time="22.158" tests="1" skipped="0" failures="0" errors="0">
-<testcase classname="This is Admin module feature scenarios" name="Verify the Add user scenario in the admin page" time="22.013">
+<testsuite name="Cucumber" time="21.431" tests="1" skipped="0" failures="0" errors="0">
+<testcase classname="This is Admin module feature scenarios" name="Verify the search and edit the user in the admin page" time="21.262">
 <system-out><![CDATA[
 Given User launch browser and enter application url.........................passed
 When User enters valid user name and valid password and click login button..passed
-And Navigaates to adim page and add a user in the application...............passed
-Then Verify the added user in the grid......................................passed
+And Navigates to Admin page and search the user with valid data.............passed
+And Edit the searched user and change the details in the admin page.........passed
+Then Verify the edited user on below grid in the admin page.................passed
 ]]></system-out>
 </testcase>
 </testsuite>

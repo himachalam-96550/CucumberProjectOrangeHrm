@@ -1,5 +1,6 @@
 package Pages;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -52,10 +53,80 @@ public class AdminPage extends BaseObjects {
 	@FindBy(xpath = "//button[normalize-space(.)='Save']")
 	private WebElement save_btn;
 
-	/*
-	 * @FindBy(xpath = "") private WebElement ;
-	 */
 
+	@FindBy(xpath = "//label[.='Username']/following::div[1]/input")
+	private WebElement username_ele;
+	
+	@FindBy(xpath = "//label[.='User Role']/following::div[3]")
+	private WebElement search_userrole_dd;
+	
+	@FindBy(xpath = "//div[@role='listbox']/div[position()>1]/span[.='Admin']")
+	private WebElement search_userrole_option ;
+	
+	@FindBy(xpath = "//label[.='Employee Name']/following::input[1]")
+	private WebElement searchEmployeName;
+	
+	@FindBy(xpath = "//label[.='Status']/following::div[2]")
+	private WebElement search_status_dd;
+	
+	@FindBy(xpath = "(//div[@role='listbox']/div[position()>1]/span)[1]")
+	private WebElement search_status_dd_option;
+	
+	@FindBy(xpath = "//button[normalize-space(text()='Search')] [@type='submit']")
+	private WebElement Adminsearch_btn;
+
+	@FindBy(xpath = "//div[@class='oxd-table-card']//div[@class='oxd-table-row oxd-table-row--with-border']/div[position()>1 and position() <6]/div")
+	private List<WebElement>  tableRowData;
+	
+	@FindBy(xpath = "(//div[@class='oxd-table-cell-actions']/button[2])[1]")
+	private WebElement editbtn;
+
+	@FindBy(xpath = "//div[@class='oxd-form-actions']/button[2]")
+	private WebElement edit_savebtn;
+
+	
+	public void edituserinTheAdminPage() throws InterruptedException {
+		
+		inputhelper.getElementAndClick(editbtn);
+		Thread.sleep(3000);
+		inputhelper.getElementAndClick(edit_savebtn);
+		
+	}
+	public void searchUserWithValidDetails() throws InterruptedException {
+		
+		Thread.sleep(3000);
+		
+		inputhelper.getElementAndClick(username_ele);
+		inputhelper.getElementAndEnterData(username_ele, "Admin");
+		
+		inputhelper.getElementAndClick(search_userrole_dd);
+		inputhelper.getElementAndClick(search_userrole_option);
+		
+		//inputhelper.getElementAndClick(searchEmployeName);
+		//inputhelper.getElementAndEnterData(searchEmployeName,"Admin");
+		
+		inputhelper.getElementAndClick(search_status_dd);
+		inputhelper.getElementAndClick(search_status_dd_option);
+		Thread.sleep(3000);
+		inputhelper.getElementAndClick(Adminsearch_btn);
+	}
+	
+	public void verifyTheSearchedUserInTheGrid() {
+		
+		
+		ArrayList<String> al = new ArrayList<String>();
+		for(WebElement ele :tableRowData) {
+			
+			  String text = ele.getText();
+			  al.add(text);
+		}
+		Object[] arr = al.toArray();
+		assertHelper.assertTwoString(arr[0].toString(), "Admin");
+		assertHelper.assertTwoString(arr[1].toString(), "Admin");
+		//assertHelper.assertTwoString(arr[2].toString(), "Admin");
+		assertHelper.assertTwoString(arr[3].toString(), "Enabled");
+	
+	}
 	public void navigateToAdminMenu() {
 
 		inputhelper.getElementAndClick(adminMenu);
@@ -103,18 +174,16 @@ public class AdminPage extends BaseObjects {
         // Press Enter
         employee_name.sendKeys(Keys.ENTER);
 		
-		Thread.sleep(2000);
-		
-		
-		//dropdownhelper.selectDropDownByText(userrole_dd_options, "Admin");
-		
-		/*
-		 * inputhelper.getElementAndClick(status_dd);
-		 * dropdownhelper.selectDropDownByText(userrole_dd_options, "Enabled");
-		 */
-		
-		
-		
-		
+		Thread.sleep(2000);	
 	}
+
+
+
+
+
+
+
+
+
+
 }
