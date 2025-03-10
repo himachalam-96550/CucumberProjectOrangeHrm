@@ -80,10 +80,81 @@ public class AdminPage extends BaseObjects {
 	
 	@FindBy(xpath = "(//div[@class='oxd-table-cell-actions']/button[2])[1]")
 	private WebElement editbtn;
-
+	
 	@FindBy(xpath = "//div[@class='oxd-form-actions']/button[2]")
 	private WebElement edit_savebtn;
 
+	@FindBy(xpath = "(//div[@class='oxd-table-cell-actions']/button[1])[1]")
+	private WebElement dltbtn;
+	
+	@FindBy(xpath = "//div[@class='orangehrm-modal-footer']/button[1]")
+	private WebElement dlt_cancelBtn;
+	
+	@FindBy(xpath = "//div[@class='orangehrm-modal-footer']/button[2]")
+	private WebElement dlt_OkBtn;
+	
+	@FindBy(xpath = "(//nav[@role='navigation'])[2]/ul/li/span[.='Job ']")
+	private WebElement nav_jobMenu;
+	
+	@FindBy(xpath = "//button[@type='button'][.= ' Add ']")
+	private WebElement job_AddBtn;
+	
+	@FindBy(xpath = "//label[.='Job Title']/following::input[1]")
+	private WebElement job_title;
+	
+	@FindBy(xpath = "//label[.='Job Description']/following::textarea[1]")
+	private WebElement job_desc;
+	
+	@FindBy(xpath = "//label[.='Note']/following::textarea")
+	private WebElement note_area;
+	
+	@FindBy(xpath = "//div[@class='oxd-form-actions']/button[.=' Save ']")
+	private WebElement job_savebtn;
+	
+	
+	  @FindBy(xpath = "//ul[@class='oxd-dropdown-menu']/li[1]/a") 
+	  private WebElement job_titles_menu;
+	  
+		
+		/*
+		 * @FindBy(xpath = "") private WebElement ;
+		 * 
+		 * @FindBy(xpath = "") private WebElement ;
+		 */
+		 
+	 
+	
+	
+	public void addNewJobInTheAdminPage() throws InterruptedException {
+		
+		Thread.sleep(2000);
+		inputhelper.getElementAndClick(nav_jobMenu);
+		Thread.sleep(1000);
+		inputhelper.getElementAndClick(job_titles_menu);
+		inputhelper.getElementAndClick(job_AddBtn);
+		
+		inputhelper.getElementAndEnterData(job_title, "softwareAutomationTester");
+		inputhelper.getElementAndClick(job_desc);
+		inputhelper.getElementAndEnterData(job_desc, "software Tester is write script to automate a software with help of tool");
+		inputhelper.getElementAndClick(note_area);
+		inputhelper.getElementAndEnterData(note_area, "This is software Automation Tester");
+		//inputhelper.getElementAndClick(job_savebtn);		
+	}
+	
+    public void verifyTheNewJobTitleInTheAdminPage() throws InterruptedException {
+		
+	     	
+	}
+	
+	
+	public void deleteSearchedUser() throws InterruptedException {
+		Thread.sleep(1000);
+		inputhelper.getElementAndClick(dltbtn);
+		Thread.sleep(2000);
+		inputhelper.getElementAndClick(dlt_cancelBtn);
+		
+	}
+	
 	
 	public void edituserinTheAdminPage() throws InterruptedException {
 		
@@ -92,12 +163,12 @@ public class AdminPage extends BaseObjects {
 		inputhelper.getElementAndClick(edit_savebtn);
 		
 	}
-	public void searchUserWithValidDetails() throws InterruptedException {
+	public void searchUserWithValidDetails(String username) throws InterruptedException {
 		
 		Thread.sleep(3000);
 		
 		inputhelper.getElementAndClick(username_ele);
-		inputhelper.getElementAndEnterData(username_ele, "Admin");
+		inputhelper.getElementAndEnterData(username_ele, username);
 		
 		inputhelper.getElementAndClick(search_userrole_dd);
 		inputhelper.getElementAndClick(search_userrole_option);
@@ -134,15 +205,8 @@ public class AdminPage extends BaseObjects {
 
 	public void AddUserInApplication() throws InterruptedException {
 
-		
-			Thread.sleep(3000);
-		
-		
-
-		inputhelper.getElementAndClick(addUser_btn);
-		
-		
-		
+	    Thread.sleep(3000);
+		inputhelper.getElementAndClick(addUser_btn);		
 		inputhelper.getElementAndClick(user_name);
 		inputhelper.getElementAndEnterData(user_name, "suamn");
 		Thread.sleep(1000);

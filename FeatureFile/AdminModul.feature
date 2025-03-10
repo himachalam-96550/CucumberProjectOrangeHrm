@@ -11,16 +11,31 @@ Scenario: Verify the Add user scenario in the admin page
 Scenario: Verify the search user with valid details in the admin page
     Given User launch browser and enter application url
     When  User enters valid user name and valid password and click login button
-    And   Navigates to Admin page and search the user with valid data
+    And   Navigates to Admin page and search the user with "Admin"
     Then  Verify the searched user on below grid in the admin page      
     
     @edituser
-    Scenario: Verify the search and edit the user in the admin page
+Scenario: Verify the search and edit the user in the admin page
     Given User launch browser and enter application url
     When  User enters valid user name and valid password and click login button
-    And   Navigates to Admin page and search the user with valid data
+    And   Navigates to Admin page and search the user with "Admin"
     And   Edit the searched user and change the details in the admin page
     Then  Verify the edited user on below grid in the admin page
+    
+@deleteuser    
+Scenario: Verify the search and delete the user in the admin page
+    Given User launch browser and enter application url
+    When  User enters valid user name and valid password and click login button
+    And   Navigates to Admin page and search the user with "asdvdsfvdfvdfv"
+    And   Delete the searched user in the admin page
+    Then  Verify the deleted user on below grid in the admin page
+
+@addjob    
+Scenario: Verify the create a new job role in the admin page
+    Given User launch browser and enter application url
+    When  User enters valid user name and valid password and click login button
+    And   Navigates to jobs and add job role in the Admin page
+    Then  Verify the created job role on below grid in the jobs menu
     
     
     
