@@ -80,10 +80,169 @@ public class AdminPage extends BaseObjects {
 	
 	@FindBy(xpath = "(//div[@class='oxd-table-cell-actions']/button[2])[1]")
 	private WebElement editbtn;
-
+	
 	@FindBy(xpath = "//div[@class='oxd-form-actions']/button[2]")
 	private WebElement edit_savebtn;
 
+	@FindBy(xpath = "(//div[@class='oxd-table-cell-actions']/button[1])[1]")
+	private WebElement dltbtn;
+	
+	@FindBy(xpath = "//div[@class='orangehrm-modal-footer']/button[1]")
+	private WebElement dlt_cancelBtn;
+	
+	@FindBy(xpath = "//div[@class='orangehrm-modal-footer']/button[2]")
+	private WebElement dlt_OkBtn;
+	
+	@FindBy(xpath = "(//nav[@role='navigation'])[2]/ul/li/span[.='Job ']")
+	private WebElement nav_jobMenu;
+	
+	@FindBy(xpath = "//button[@type='button'][.= ' Add ']")
+	private WebElement job_AddBtn;
+	
+	@FindBy(xpath = "//label[.='Job Title']/following::input[1]")
+	private WebElement job_title;
+	
+	@FindBy(xpath = "//label[.='Job Description']/following::textarea[1]")
+	private WebElement job_desc;
+	
+	@FindBy(xpath = "//label[.='Note']/following::textarea")
+	private WebElement note_area;
+	
+	@FindBy(xpath = "//div[@class='oxd-form-actions']/button[.=' Save ']")
+	private WebElement job_savebtn;
+	
+	
+	  @FindBy(xpath = "//ul[@class='oxd-dropdown-menu']/li[1]/a") 
+	  private WebElement job_titles_menu;
+	  
+		
+		
+		  @FindBy(xpath = "//div[@class='oxd-table-body']/div/div/div[2]/div") 
+		  private List<WebElement> role_title_els ;
+		  
+		  @FindBy(xpath = "//div[@class='oxd-table-body']/div/div/div[4]//div/button[2]") 
+		  private List<WebElement> editBtn_els;
+		 
+		  @FindBy(xpath = "//div[@class='orangehrm-modal-footer']/button[2]") 
+		  private WebElement jobrole_dltbtn;
+		  
+		  
+		  public void getRoleTitleAndClickEditButton() throws InterruptedException {
+			  
+			  
+			  
+			  for(int i=1; i<=role_title_els.size(); i++) {
+				  
+				  WebElement titleNameele = driver.findElement(By.xpath("(//div[@class='oxd-table-body']/div/div)["+i+"]/div[2]/div"));
+				  String name = titleNameele.getText();
+				  System.out.println(name);
+				  if(name.equals("softwareAutomationTester")) {
+					
+					  WebElement editbtn = driver.findElement(By.xpath("(//div[@class='oxd-table-body']/div/div)["+i+"]//div/button[2]"));
+					  editbtn.click();
+					  break;
+				  }
+			  }
+			  
+			  inputhelper.getElementAndClick(job_desc);
+			  inputhelper.getElementAndEnterData(job_desc, "suman");
+			  inputhelper.getElementAndClick(job_savebtn);
+			  Thread.sleep(2000);
+		  }
+	 
+	public void verifyTheEditedJobRoleInTheGrid() {
+		
+		for(int i=1; i<=role_title_els.size(); i++) {
+			  
+			  WebElement titleNameele = driver.findElement(By.xpath("(//div[@class='oxd-table-body']/div/div)["+i+"]/div[2]/div"));
+			  String name = titleNameele.getText();
+			  System.out.println(name);
+			  if(name.equals("softwareAutomationTester")) {
+				
+				  WebElement jobdesc_ele= driver.findElement(By.xpath("(//div[@class='oxd-table-body']/div/div)["+i+"]/div[3]//div/span"));
+				  String description = jobdesc_ele.getText();
+				  assertHelper.assertTwoString(description,"suman");
+				  break;
+			  }
+		  }	
+	}
+	
+	
+	public void getRoleTitleAndClickDeleteButton() throws InterruptedException {
+		  
+		  
+		  
+		  for(int i=1; i<=role_title_els.size(); i++) {
+			  
+			  WebElement titleNameele = driver.findElement(By.xpath("(//div[@class='oxd-table-body']/div/div)["+i+"]/div[2]/div"));
+			  String name = titleNameele.getText();
+			  System.out.println(name);
+			  if(name.equals("softwareAutomationTester")) {
+				
+				  WebElement editbtn = driver.findElement(By.xpath("(//div[@class='oxd-table-body']/div/div)["+i+"]//div/button[1]"));
+				  editbtn.click();
+				  break;
+			  }
+		  }
+		  
+			
+			  inputhelper.getElementAndClick(jobrole_dltbtn);
+			  
+			 
+		  Thread.sleep(2000);
+	  }
+
+	public void navigateToJobRoleMenu() throws InterruptedException {
+		
+		Thread.sleep(2000);
+		inputhelper.getElementAndClick(nav_jobMenu);
+		Thread.sleep(1000);
+		inputhelper.getElementAndClick(job_titles_menu);
+	}
+	public void addNewJobInTheAdminPage() throws InterruptedException {
+		
+		Thread.sleep(2000);
+		inputhelper.getElementAndClick(nav_jobMenu);
+		Thread.sleep(1000);
+		inputhelper.getElementAndClick(job_titles_menu);
+		inputhelper.getElementAndClick(job_AddBtn);
+		
+		inputhelper.getElementAndEnterData(job_title, "softwareAutomationTester");
+		inputhelper.getElementAndClick(job_desc);
+		inputhelper.getElementAndEnterData(job_desc, "software Tester is write script to automate a software with help of tool");
+		inputhelper.getElementAndClick(note_area);
+		inputhelper.getElementAndEnterData(note_area, "This is software Automation Tester");
+		Thread.sleep(1000);
+		inputhelper.getElementAndClick(job_savebtn);		
+		Thread.sleep(2000);
+	}
+	
+    public void verifyTheNewJobTitleInTheAdminPage() throws InterruptedException {
+		
+    	for(int i=1; i<=role_title_els.size(); i++) {
+			  
+			  WebElement titleNameele = driver.findElement(By.xpath("(//div[@class='oxd-table-body']/div/div)["+i+"]/div[2]/div"));
+			  String name = titleNameele.getText();
+			  System.out.println(name);
+			  if(name.equals("softwareAutomationTester")) {
+				
+				  assertHelper.assertTwoString(name,"softwareAutomationTester");
+				  break;
+			  }
+		  }
+		  
+	     	
+	}
+	
+	
+	public void deleteSearchedUser() throws InterruptedException {
+		Thread.sleep(1000);
+		inputhelper.getElementAndClick(dltbtn);
+		Thread.sleep(2000);
+		inputhelper.getElementAndClick(dlt_cancelBtn);
+		
+	}
+	
 	
 	public void edituserinTheAdminPage() throws InterruptedException {
 		
@@ -92,12 +251,12 @@ public class AdminPage extends BaseObjects {
 		inputhelper.getElementAndClick(edit_savebtn);
 		
 	}
-	public void searchUserWithValidDetails() throws InterruptedException {
+	public void searchUserWithValidDetails(String username) throws InterruptedException {
 		
 		Thread.sleep(3000);
 		
 		inputhelper.getElementAndClick(username_ele);
-		inputhelper.getElementAndEnterData(username_ele, "Admin");
+		inputhelper.getElementAndEnterData(username_ele, username);
 		
 		inputhelper.getElementAndClick(search_userrole_dd);
 		inputhelper.getElementAndClick(search_userrole_option);
@@ -134,15 +293,8 @@ public class AdminPage extends BaseObjects {
 
 	public void AddUserInApplication() throws InterruptedException {
 
-		
-			Thread.sleep(3000);
-		
-		
-
-		inputhelper.getElementAndClick(addUser_btn);
-		
-		
-		
+	    Thread.sleep(3000);
+		inputhelper.getElementAndClick(addUser_btn);		
 		inputhelper.getElementAndClick(user_name);
 		inputhelper.getElementAndEnterData(user_name, "suamn");
 		Thread.sleep(1000);
