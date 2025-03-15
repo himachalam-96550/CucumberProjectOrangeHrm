@@ -11,7 +11,7 @@ public class Hooks extends BaseObjects{
 	@After
 	public void tearDown() {
 		
-		//driver.quit();
+		driver.quit();
 		
 	}
 	

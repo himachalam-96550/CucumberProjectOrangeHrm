@@ -116,15 +116,89 @@ public class AdminPage extends BaseObjects {
 	  private WebElement job_titles_menu;
 	  
 		
-		/*
-		 * @FindBy(xpath = "") private WebElement ;
-		 * 
-		 * @FindBy(xpath = "") private WebElement ;
-		 */
+		
+		  @FindBy(xpath = "//div[@class='oxd-table-body']/div/div/div[2]/div") 
+		  private List<WebElement> role_title_els ;
+		  
+		  @FindBy(xpath = "//div[@class='oxd-table-body']/div/div/div[4]//div/button[2]") 
+		  private List<WebElement> editBtn_els;
 		 
+		  @FindBy(xpath = "//div[@class='orangehrm-modal-footer']/button[2]") 
+		  private WebElement jobrole_dltbtn;
+		  
+		  
+		  public void getRoleTitleAndClickEditButton() throws InterruptedException {
+			  
+			  
+			  
+			  for(int i=1; i<=role_title_els.size(); i++) {
+				  
+				  WebElement titleNameele = driver.findElement(By.xpath("(//div[@class='oxd-table-body']/div/div)["+i+"]/div[2]/div"));
+				  String name = titleNameele.getText();
+				  System.out.println(name);
+				  if(name.equals("softwareAutomationTester")) {
+					
+					  WebElement editbtn = driver.findElement(By.xpath("(//div[@class='oxd-table-body']/div/div)["+i+"]//div/button[2]"));
+					  editbtn.click();
+					  break;
+				  }
+			  }
+			  
+			  inputhelper.getElementAndClick(job_desc);
+			  inputhelper.getElementAndEnterData(job_desc, "suman");
+			  inputhelper.getElementAndClick(job_savebtn);
+			  Thread.sleep(2000);
+		  }
 	 
+	public void verifyTheEditedJobRoleInTheGrid() {
+		
+		for(int i=1; i<=role_title_els.size(); i++) {
+			  
+			  WebElement titleNameele = driver.findElement(By.xpath("(//div[@class='oxd-table-body']/div/div)["+i+"]/div[2]/div"));
+			  String name = titleNameele.getText();
+			  System.out.println(name);
+			  if(name.equals("softwareAutomationTester")) {
+				
+				  WebElement jobdesc_ele= driver.findElement(By.xpath("(//div[@class='oxd-table-body']/div/div)["+i+"]/div[3]//div/span"));
+				  String description = jobdesc_ele.getText();
+				  assertHelper.assertTwoString(description,"suman");
+				  break;
+			  }
+		  }	
+	}
 	
 	
+	public void getRoleTitleAndClickDeleteButton() throws InterruptedException {
+		  
+		  
+		  
+		  for(int i=1; i<=role_title_els.size(); i++) {
+			  
+			  WebElement titleNameele = driver.findElement(By.xpath("(//div[@class='oxd-table-body']/div/div)["+i+"]/div[2]/div"));
+			  String name = titleNameele.getText();
+			  System.out.println(name);
+			  if(name.equals("softwareAutomationTester")) {
+				
+				  WebElement editbtn = driver.findElement(By.xpath("(//div[@class='oxd-table-body']/div/div)["+i+"]//div/button[1]"));
+				  editbtn.click();
+				  break;
+			  }
+		  }
+		  
+			
+			  inputhelper.getElementAndClick(jobrole_dltbtn);
+			  
+			 
+		  Thread.sleep(2000);
+	  }
+
+	public void navigateToJobRoleMenu() throws InterruptedException {
+		
+		Thread.sleep(2000);
+		inputhelper.getElementAndClick(nav_jobMenu);
+		Thread.sleep(1000);
+		inputhelper.getElementAndClick(job_titles_menu);
+	}
 	public void addNewJobInTheAdminPage() throws InterruptedException {
 		
 		Thread.sleep(2000);
@@ -138,11 +212,25 @@ public class AdminPage extends BaseObjects {
 		inputhelper.getElementAndEnterData(job_desc, "software Tester is write script to automate a software with help of tool");
 		inputhelper.getElementAndClick(note_area);
 		inputhelper.getElementAndEnterData(note_area, "This is software Automation Tester");
-		//inputhelper.getElementAndClick(job_savebtn);		
+		Thread.sleep(1000);
+		inputhelper.getElementAndClick(job_savebtn);		
+		Thread.sleep(2000);
 	}
 	
     public void verifyTheNewJobTitleInTheAdminPage() throws InterruptedException {
 		
+    	for(int i=1; i<=role_title_els.size(); i++) {
+			  
+			  WebElement titleNameele = driver.findElement(By.xpath("(//div[@class='oxd-table-body']/div/div)["+i+"]/div[2]/div"));
+			  String name = titleNameele.getText();
+			  System.out.println(name);
+			  if(name.equals("softwareAutomationTester")) {
+				
+				  assertHelper.assertTwoString(name,"softwareAutomationTester");
+				  break;
+			  }
+		  }
+		  
 	     	
 	}
 	

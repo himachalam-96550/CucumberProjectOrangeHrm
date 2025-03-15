@@ -11,7 +11,7 @@ import io.cucumber.junit.CucumberOptions;
 		features = "C:\\Users\\suman\\eclipse-workspace\\OrangeHRMCucumber\\FeatureFile\\AdminModul.feature",
 	    glue = {"StepDefinition","hooks"},
 	    dryRun = !true,
-	    tags = ("@addjob"),
+	    tags = ("@jobrole"),
 	    plugin = {
 	        "pretty",                             
 	        "html:target/cucumber-reports.html",   

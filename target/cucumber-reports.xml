@@ -1,11 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Cucumber" time="15.948" tests="1" skipped="0" failures="0" errors="0">
-<testcase classname="This is Admin module feature scenarios" name="Verify the create a new job role in the admin page" time="15.737">
+<testsuite name="Cucumber" time="59.091" tests="3" skipped="0" failures="1" errors="0">
+<testcase classname="This is Admin module feature scenarios" name="Verify the create a new job role in the admin page" time="18.985">
 <system-out><![CDATA[
 Given User launch browser and enter application url.........................passed
 When User enters valid user name and valid password and click login button..passed
 And Navigates to jobs and add job role in the Admin page....................passed
 Then Verify the created job role on below grid in the jobs menu.............passed
+]]></system-out>
+</testcase>
+<testcase classname="This is Admin module feature scenarios" name="Verify the edit job role in the admin page" time="21.829">
+<failure type="java.lang.AssertionError" message="expected [suman] but found [software Tester is write script to automate a soft...]">
+<![CDATA[java.lang.AssertionError: expected [suman] but found [software Tester is write script to automate a soft...]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1578)
+	at org.testng.Assert.assertEqualsImpl(Assert.java:150)
+	at org.testng.Assert.assertEquals(Assert.java:132)
+	at org.testng.Assert.assertEquals(Assert.java:656)
+	at org.testng.Assert.assertEquals(Assert.java:666)
+	at HelperClass.AssertHelper.assertTwoString(AssertHelper.java:16)
+	at Pages.AdminPage.verifyTheEditedJobRoleInTheGrid(AdminPage.java:164)
+	at StepDefinition.AdminSteps.verify_the_edited_job_role_on_below_grid_in_the_jobs_menu(AdminSteps.java:95)
+	at ✽.Verify the edited job role on below grid in the jobs menu(file:///C:/Users/suman/eclipse-workspace/OrangeHRMCucumber/FeatureFile/AdminModul.feature:45)
+]]>
+</failure>
+<system-out><![CDATA[
+Given User launch browser and enter application url.........................passed
+When User enters valid user name and valid password and click login button..passed
+And Navigates to jobs and edit the job role created by the admin user.......passed
+Then Verify the edited job role on below grid in the jobs menu..............failed
+]]></system-out>
+</testcase>
+<testcase classname="This is Admin module feature scenarios" name="Verify the delete job role in the admin page" time="17.951">
+<system-out><![CDATA[
+Given User launch browser and enter application url.........................passed
+When User enters valid user name and valid password and click login button..passed
+And Navigates to jobs and delete the job role created by the admin user.....passed
+Then Verify the edit job role on below grid in the jobs menu................passed
 ]]></system-out>
 </testcase>
 </testsuite>
