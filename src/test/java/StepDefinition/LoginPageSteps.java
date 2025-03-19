@@ -24,7 +24,7 @@ public class LoginPageSteps extends InitPageObjectClasses {
 	@When("User enters valid user name and valid password and click login button")
 	public void user_enters_valid_user_name_and_valid_password_and_click_login_button() {
 	    
-		loginpage().login();
+		loginpage().login("Admin","admin123");
 		
 	}
 
