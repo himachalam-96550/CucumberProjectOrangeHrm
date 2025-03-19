@@ -161,7 +161,8 @@ public class AdminPage extends BaseObjects {
 				
 				  WebElement jobdesc_ele= driver.findElement(By.xpath("(//div[@class='oxd-table-body']/div/div)["+i+"]/div[3]//div/span"));
 				  String description = jobdesc_ele.getText();
-				  assertHelper.assertTwoString(description,"suman");
+				  System.out.println(description);
+				  assertHelper.assertTheStringsContains(description, name);
 				  break;
 			  }
 		  }	

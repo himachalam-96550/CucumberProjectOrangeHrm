@@ -36,12 +36,11 @@ public class LoginPage extends BaseObjects {
 	 * driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10)); }
 	 */
     
-	public void login() {
+	public void login(String username, String pwd) {
 		
-		userName.sendKeys("Admin");
-		password.sendKeys("admin123");
-		loginbtn.click();
-		
+		inputhelper.getElementAndEnterData(userName,username);
+		inputhelper.getElementAndEnterData(password,pwd);
+		inputhelper.getElementAndClick(loginbtn);
 	}
 	
 	public void verifyTheUrlOfTheApplication(String acturl) {
