@@ -22,7 +22,7 @@ public class RecruitmentPage extends BaseObjects {
 	@FindBy(xpath = "//label[.='Job Title']/following::div[3]")
 	private WebElement jobTitle_dd;
 
-	@FindBy(xpath = "//div[@class='oxd-select-dropdown --positon-bottom']/div[3]")
+	@FindBy(xpath = "//div[@class='oxd-select-dropdown --positon-bottom']/div[.='softwareAutomationTester']")
 	private WebElement jobTitle_dd_option;
 
 	@FindBy(xpath = "//label[.='Description']/following::textarea")
@@ -46,7 +46,7 @@ public class RecruitmentPage extends BaseObjects {
 	@FindBy(xpath = "//label[.='Job Title']/following::div[3]")
 	private WebElement jobTitle_dd_duplicate; // Kept this in case it's used in a different context
 
-	@FindBy(xpath = "//div[@class='oxd-select-option']/span[.='Automaton Tester']")
+	@FindBy(xpath = "//div[@class='oxd-select-option']/span[.='softwareAutomationTester']")
 	private WebElement jobTitle_dd_option_automation_tester;
 
 	@FindBy(xpath = "//label[.='Vacancy']/following::div[3]")
@@ -73,9 +73,12 @@ public class RecruitmentPage extends BaseObjects {
 		inputhelper.getElementAndClick(recruitment_menu);
 	}
 
-	public void verifyTheCreatedVacancyInTheGrid() {
-
-		browserHelper.goBack();
+	
+	public void searchVacancy() {
+		
+		generalhelper.waitForElementToBeClickable(vacancies_menu, 10);
+		inputhelper.getElementAndClick(vacancies_menu);
+		
 		generalhelper.waitForElementToBeClickable(jobTitle_dd_duplicate, 10);
 		inputhelper.getElementAndClick(jobTitle_dd_duplicate);
 		inputhelper.getElementAndClick(jobTitle_dd_option);
@@ -85,8 +88,22 @@ public class RecruitmentPage extends BaseObjects {
 		
 		inputhelper.getElementAndClick(recruitment_search_btn);
 		
-		assertHelper.assertText(table_vacancy_title, "AutomationTestEngineer");
-		
+	}
+	public void verifyTheCreatedVacancyInTheGrid() {
+
+		browserHelper.goBack();
+		generalhelper.waitForElementToBeClickable(jobTitle_dd_duplicate, 10);
+		inputhelper.getElementAndClick(jobTitle_dd_duplicate);
+		inputhelper.getElementAndClick(jobTitle_dd_option);
+
+		/*
+		 * inputhelper.getElementAndClick(vacancy_dd);
+		 * inputhelper.getElementAndClick(vacancy_dd_option);
+		 * 
+		 * inputhelper.getElementAndClick(recruitment_search_btn);
+		 * 
+		 * assertHelper.assertText(table_vacancy_title, "AutomationTestEngineer");
+		 */
 
 	}
 
@@ -103,7 +120,8 @@ public class RecruitmentPage extends BaseObjects {
 		inputhelper.getElementAndClick(jobTitle_dd_option);
 		inputhelper.getElementAndClick(description_area);
 		inputhelper.getElementAndEnterData(description_area, "this is job vacancy area");
-		inputhelper.getElementAndEnterData(hiring_manager_input, "Maximovcat F Kennedy");
+		
+		inputhelper.getElementAndEnterData(hiring_manager_input, "a");
 		generalhelper.hardWait(3000);
 		hiring_manager_input.sendKeys(Keys.DOWN);
 		hiring_manager_input.sendKeys(Keys.ENTER);

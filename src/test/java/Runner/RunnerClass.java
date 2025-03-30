@@ -8,20 +8,21 @@ import io.cucumber.junit.CucumberOptions;
 @RunWith(Cucumber.class)
 @CucumberOptions(
 		
-		features = "FeatureFile/Recruitment.feature",
+		features = "FeatureFile/AdminModul.feature",
 	    glue = {"StepDefinition","hooks"},
 	    dryRun = !true,
-	    tags = ("@edit"),
-	    plugin = {
-	        "pretty",                             
-	        "html:target/cucumber-reports.html",   
-	        "json:target/cucumber-reports.json",   
-	        "junit:target/cucumber-reports.xml"    
-	    }
-	                            
+	   // tags = ("@add"),
+	    plugin = {"io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"}
+	    		                        
 		)
 public class RunnerClass {
 	
 	//https://github.com/himachalam-96550/CucumberProjectOrangeHrm.git
     // FeatureFile/PimModul.feature
+	
+	//To Start Server. Generate and open Report
+	//allure serve allure-results
+
+	//To Generate Single Html Report
+	//allure generate --single-file allure-results --clean
 }

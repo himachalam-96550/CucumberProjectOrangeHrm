@@ -1,6 +1,9 @@
 package StepDefinition;
 
+import StandardUtils.DriverFactory;
 import StandardUtils.InitPageObjectClasses;
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
@@ -29,7 +32,7 @@ public class RecruitmentSteps  extends InitPageObjectClasses {
 	//Edit Scenario
 	@When("Search and edit the created vacancy in the vacancy menu")
 	public void search_and_edit_the_created_vacancy_in_the_vacancy_menu() {
-	    
+	   // recruitmentpage().searchVacancy();
 		
 	}
 	@Then("Verify the edited vacancy in the vacancy page")
@@ -39,5 +42,28 @@ public class RecruitmentSteps  extends InitPageObjectClasses {
 	}
 	
 	
+	@Before("@addjobtitle")
+	public void beforeAddJobTitle() throws InterruptedException {
+		
+		DriverFactory.launchBrowser();
+		loginpage().login();
+		adminPage().navigateToAdminMenu();
+		adminPage().addNewJobInTheAdminPage();
+		loginpage().terarDown();
+		
+	}
+	
+	@After("@deletejobtitle")
+	public void afterDeleteJobTitle() throws InterruptedException {
+		
+		DriverFactory.launchBrowser();
+		loginpage().login();
+		adminPage().navigateToAdminMenu();
+		//adminPage().addNewJobInTheAdminPage();
+		adminPage().navigateToJobRoleMenu();
+		adminPage().getRoleTitleAndClickDeleteButton();
+		loginpage().terarDown();
+		
+	}
 	
 }

@@ -1,6 +1,6 @@
 Feature: recruitment page all scenarios
 
-
+@add @addjobtitle @deletejobtitle
 Scenario: Verify the Add new vacancy in the recruitment page
     Given User launch browser and enter application url
     When  User enters valid user name and valid password and click login button
